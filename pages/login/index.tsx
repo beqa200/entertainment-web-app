@@ -1,6 +1,7 @@
+import NestedLayout from "@/layouts/NestedLayout";
 import { FormWrapper, StyledForm } from "@/styled-components";
 import Link from "next/link";
-import { useForm, Resolver } from "react-hook-form";
+import { ReactElement } from "react";
 
 export default function Login() {
   return (
@@ -18,3 +19,7 @@ export default function Login() {
     </FormWrapper>
   );
 }
+
+Login.getLayout = function (page: ReactElement) {
+  return <NestedLayout>{page}</NestedLayout>;
+};

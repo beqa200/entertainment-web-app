@@ -1,5 +1,7 @@
+import NestedLayout from "@/layouts/NestedLayout";
 import { FormWrapper, StyledForm } from "@/styled-components";
 import Link from "next/link";
+import { ReactElement } from "react";
 import { useForm } from "react-hook-form";
 
 type FormValues = {
@@ -8,7 +10,7 @@ type FormValues = {
   repeatPassword: string;
 };
 
-export default function Login() {
+export default function SignUp() {
   const {
     register,
     handleSubmit,
@@ -56,9 +58,9 @@ export default function Login() {
               value === formValues.password || "Passwords do not match",
           })}
         />
-          {errors.repeatPassword && !errors.password && (
-            <p className="error">{errors.repeatPassword.message}</p>
-          )}
+        {errors.repeatPassword && !errors.password && (
+          <p className="error">{errors.repeatPassword.message}</p>
+        )}
         <button
           type="submit"
           onClick={() => {
@@ -74,3 +76,7 @@ export default function Login() {
     </FormWrapper>
   );
 }
+
+SignUp.getLayout = function (page: ReactElement) {
+  return <NestedLayout>{page}</NestedLayout>;
+};
