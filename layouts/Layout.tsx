@@ -1,3 +1,4 @@
+import Search from "@/components/Search";
 import GlobalStyles from "@/styled-components/GlobalStyles";
 import Header from "../components/Header";
 
@@ -8,9 +9,13 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   return (
     <>
-      <Header />
       <GlobalStyles />
-      <main>{children}</main>
+      <Header />
+
+      <main style={{ padding: "0 16px" }}>
+        <Search />
+        {children}
+      </main>
     </>
   );
 }
