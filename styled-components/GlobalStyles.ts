@@ -12,6 +12,8 @@ const GlobalStyles = createGlobalStyle`
     body {
         background: #10141E;
         min-height: 100vh;
+        width: 100vw;
+        overflow-x: hidden;
     }
 
     a{
