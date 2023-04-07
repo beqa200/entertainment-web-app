@@ -6,7 +6,7 @@ export default function Slider() {
   const [trendingData, setTrendingData] = useState<Movie[]>();
   useEffect(() => {
     (async () => {
-      const response = await fetch("https://entertainment-web-app-seven-beta.vercel.app//api/movies");
+      const response = await fetch("/api/movies");
       const data = await response.json();
       const filteredData = data.filter((item: Movie) => item.isTrending);
       setTrendingData(filteredData);
