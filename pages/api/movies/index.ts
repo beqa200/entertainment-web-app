@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
-import data from "../_data";
 import { connectDB, movieSchema } from "../_db";
 
 connectDB();

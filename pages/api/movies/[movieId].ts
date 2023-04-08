@@ -20,7 +20,6 @@ export default async function handler(
       res.status(400).send("Bad Request");
     }
   } else if (req.method == "PUT") {
-    console.log(req.body);
     movie.isBookmarked = req.body.isBookmarked;
     await movie.save();
     res.status(200).send(movie);
