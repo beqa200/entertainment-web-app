@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import Bookmark from "./Bookmark";
+import Movie from "./Movie";
 export default function Slider() {
   const [trendingData, setTrendingData] = useState<Movie[]>();
+
+  
   useEffect(() => {
     (async () => {
       const response = await fetch("/api/movies");
@@ -41,19 +43,8 @@ export default function Slider() {
           setIsClicked(true);
         }}
       >
-        {trendingData?.map((item: Movie) => (
-          <div
-            className="slide"
-            key={Math.random()}
-            style={{
-              backgroundImage: `url(${item.thumbnail.trending.large.replace(
-                "./assets",
-                ""
-              )})`,
-            }}
-          >
-            <Bookmark isBookMarked={item.isBookmarked} />
-          </div>
+        {trendingData?.map((item: Movie, index) => (
+          <Movie movie={item} trendingData={trendingData} setTrendingData={setTrendingData} index={index}/>
         ))}
       </div>
     </SliderWrapper>
@@ -81,12 +72,6 @@ const SliderWrapper = styled.div`
     overflow-x: scroll;
     margin-top: 16px;
 
-    .slide {
-      min-width: 240px;
-      height: 140px;
-      background-size: cover;
-      border-radius: 8px;
-      position: relative;
-    }
+ 
   }
 `;
