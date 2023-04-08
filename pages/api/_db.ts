@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 export function connectDB() {
-  if (process.env.DB_CONNECT) {
-    mongoose.connect(process.env.DB_CONNECT);
-  }
+ 
+    mongoose.connect("mongodb+srv://beqamaisuradze912:disneyboy2003@cluster0.rfz3wcg.mongodb.net/?retryWrites=true&w=majority");
+  
 
   const db = mongoose.connection;
 
