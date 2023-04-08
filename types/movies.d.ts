@@ -16,4 +16,5 @@ interface Movie {
     rating: string;
     isBookmarked: boolean;
     isTrending: boolean;
+    id: string;
   }

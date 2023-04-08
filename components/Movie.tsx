@@ -12,12 +12,19 @@ export default function Movie({
   setTrendingData: (trendingData: Movie[]) => void;
   index: number;
 }) {
-  const bookMark = () => {
+  const bookMark = async () => {
     const dataClone = [...trendingData];
     dataClone[index].isBookmarked = !dataClone[index].isBookmarked;
     setTrendingData(dataClone);
+    console.log(dataClone[index].id);
 
-    
+    await fetch(`/api/movies/${dataClone[index].id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ isBookmarked: dataClone[index].isBookmarked }),
+    });
   };
   return (
     <MovieWrapper>

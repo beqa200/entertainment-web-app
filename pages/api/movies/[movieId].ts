@@ -11,13 +11,18 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { movieId } = req.query;
+  const movie = await Movie.findById(movieId);
 
   if (req.method == "GET") {
     try {
-      const movie = await Movie.findById(movieId);
       res.status(200).send(movie);
     } catch (err) {
       res.status(400).send("Bad Request");
     }
+  } else if (req.method == "PUT") {
+    console.log(req.body);
+    movie.isBookmarked = req.body.isBookmarked;
+    await movie.save();
+    res.status(200).send(movie);
   }
 }
