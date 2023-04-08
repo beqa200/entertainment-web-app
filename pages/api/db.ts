@@ -38,7 +38,7 @@ const movieSchema = new mongoose.Schema({
   thumbnail: {
     trending: {
       type: thumbnailSchema,
-      required: true,
+      required: false,
     },
     regular: {
       type: thumbnailSchema,

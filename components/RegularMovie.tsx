@@ -1,22 +1,22 @@
 import styled from "styled-components";
 import Image from "next/image";
-
 export default function Movie({
   movie,
-  trendingData,
-  setTrendingData,
+  data,
+  setData,
   index,
 }: {
   movie: Movie;
-  trendingData: Movie[];
-  setTrendingData: (trendingData: Movie[]) => void;
+  data: Movie[];
+  setData: (data: Movie[]) => void;
   index: number;
 }) {
   const bookMark = async () => {
-    const dataClone = [...trendingData];
+    const dataClone = [...data];
+    console.log(index);
     dataClone[index].isBookmarked = !dataClone[index].isBookmarked;
-    setTrendingData(dataClone);
-    console.log(dataClone[index].id);
+    setData(dataClone);
+    console.log(dataClone[index]);
 
     await fetch(`/api/movies/${dataClone[index].id}`, {
       method: "PUT",
@@ -26,15 +26,21 @@ export default function Movie({
       body: JSON.stringify({ isBookmarked: dataClone[index].isBookmarked }),
     });
   };
+
+  
   return (
-    <MovieWrapper>
-      <Image
+    <RegularMovieWrapper>
+      {movie ? <Image
         className="cover"
-        src={movie.thumbnail.trending.small.replace("./assets", "")}
-        width={470}
-        height={230}
+        src={
+          movie.isTrending
+            ? movie.thumbnail.trending.small.replace("./assets", "")
+            : movie.thumbnail.regular.small.replace("./assets", "")
+        }
+        width={164}
+        height={110}
         alt={movie.title}
-      />
+      />: <img className="cover" src="/logo.svg"/>}
 
       <div className="bookmark" onClick={bookMark}>
         <Image
@@ -70,22 +76,22 @@ export default function Movie({
         </div>
         <h2 className="title">{movie.title}</h2>
       </div>
-    </MovieWrapper>
+    </RegularMovieWrapper>
   );
 }
 
-const MovieWrapper = styled.div`
-  min-width: 240px;
-  height: 140px;
+const RegularMovieWrapper = styled.div`
+  width: 164px;
+  height: 160px;
   background-size: cover;
   border-radius: 8px;
   position: relative;
 
   .cover {
-    position: absolute;
+    /* position: absolute; */
     z-index: -1;
     width: 100%;
-    height: 100%;
+    height: 110px;
     border-radius: 8px;
   }
 
@@ -103,7 +109,7 @@ const MovieWrapper = styled.div`
   }
 
   .info {
-    position: absolute;
+    /* position: absolute; */
     bottom: 16px;
     left: 16px;
     .details {
@@ -124,6 +130,7 @@ const MovieWrapper = styled.div`
       }
     }
     .title {
+      color: white;
       font-weight: 500;
       font-size: 15px;
       line-height: 19px;

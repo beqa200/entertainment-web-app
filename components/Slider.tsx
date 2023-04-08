@@ -1,20 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import Movie from "./Movie";
-export default function Slider() {
-  const [trendingData, setTrendingData] = useState<Movie[]>();
-
-  
-  useEffect(() => {
-    (async () => {
-      const response = await fetch("/api/movies");
-      const data = await response.json();
-      const filteredData = data.filter((item: Movie) => item.isTrending);
-      setTrendingData(filteredData);
-    })();
-  }, []);
-
+import Movie from "./TrendingMovie";
+import TrendingMovie from "./TrendingMovie";
+export default function Slider({
+  trendingData,
+  setTrendingData,
+}: {
+  trendingData: Movie[];
+  setTrendingData: (trendingData: Movie[]) => void;
+}) {
   const scrollableRef = useRef<HTMLDivElement>(null);
   const [isClicked, setIsClicked] = useState(false);
   useEffect(() => {
@@ -44,15 +39,22 @@ export default function Slider() {
         }}
       >
         {trendingData?.map((item: Movie, index) => (
-          <Movie movie={item} trendingData={trendingData} setTrendingData={setTrendingData} index={index}/>
+          <TrendingMovie
+            movie={item}
+            data={trendingData}
+            setData={setTrendingData}
+            index={index}
+            key={item.id}
+          />
         ))}
       </div>
     </SliderWrapper>
   );
 }
 
-const SliderWrapper = styled.div`
+const SliderWrapper = styled.section`
   margin-top: 26px;
+  height: 180px;
   h2 {
     font-size: 20px;
     line-height: 25px;
@@ -71,7 +73,5 @@ const SliderWrapper = styled.div`
     padding: 0 16px;
     overflow-x: scroll;
     margin-top: 16px;
-
- 
   }
 `;

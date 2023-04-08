@@ -12,7 +12,7 @@ export default async function handler(
 ) {
   const { movieId } = req.query;
   const movie = await Movie.findById(movieId);
-
+console.log(movie);
   if (req.method == "GET") {
     try {
       res.status(200).send(movie);
