@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
-import { connectDB, movieSchema } from "../_db";
+import { connectDB, movieSchema } from "../db";
 
 connectDB();
 const Movie = mongoose.models.Movie || mongoose.model("Movie", movieSchema);
