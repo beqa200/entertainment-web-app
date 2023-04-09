@@ -3,10 +3,6 @@
     "api/db.ts": {
       "memory": 3008,
       "maxDuration": 35
-    },
-    "api/*.ts": {
-      "memory": 3008,
-      "maxDuration": 35
     }
   }
 }
