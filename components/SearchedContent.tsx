@@ -3,18 +3,12 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import RegularMovie from "./RegularMovie";
 import Movie from "./TrendingMovie";
-export default function SearchedContent({
-  wholeData,
-  setWholeData,
-}: {
-  wholeData: Movie[];
-  setWholeData: (wholeData: Movie[]) => void;
-}) {
+export default function SearchedContent() {
   const [searchedData, setSearchData] = useState<Movie[]>();
   const context = useContext(MyContext);
 
   useEffect(() => {
-    const filtered = wholeData.filter(
+    const filtered = context.wholeData.filter(
       (item) =>
         context?.searchResult?.toLocaleLowerCase() ==
         item.title.slice(0, context?.searchResult?.length).toLocaleLowerCase()
@@ -30,9 +24,7 @@ export default function SearchedContent({
         {searchedData?.map((item: Movie, index) => (
           <RegularMovie
             movie={item}
-            data={wholeData}
-            setData={setWholeData}
-            index={wholeData.indexOf(item)}
+            index={context.wholeData.indexOf(item)}
             key={item.id}
           />
         ))}

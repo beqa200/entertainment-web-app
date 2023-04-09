@@ -1,17 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Movie from "./TrendingMovie";
 import TrendingMovie from "./TrendingMovie";
-export default function Slider({
-  trendingData,
-  setTrendingData,
-}: {
-  trendingData: Movie[];
-  setTrendingData: (trendingData: Movie[]) => void;
-}) {
+import { MyContext } from "@/pages/_app";
+export default function Slider() {
   const scrollableRef = useRef<HTMLDivElement>(null);
   const [isClicked, setIsClicked] = useState(false);
+  const context = useContext(MyContext);
   useEffect(() => {
     let intervalId: NodeJS.Timeout | null = null;
 
@@ -38,14 +34,8 @@ export default function Slider({
           setIsClicked(true);
         }}
       >
-        {trendingData?.map((item: Movie, index) => (
-          <TrendingMovie
-            movie={item}
-            data={trendingData}
-            setData={setTrendingData}
-            index={index}
-            key={item.id}
-          />
+        {context.trendingData?.map((item: Movie, index) => (
+          <TrendingMovie movie={item} index={index} key={item.id} />
         ))}
       </div>
     </SliderWrapper>

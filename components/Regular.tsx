@@ -1,28 +1,19 @@
-import { useEffect, useState } from "react";
+import { MyContext } from "@/pages/_app";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import RegularMovie from "./RegularMovie";
 import Movie from "./TrendingMovie";
-export default function Recommended({
-  recommendedData,
-  setRecommendedData,
-  wholeData,
-  setWholeData,
-}: {
-  recommendedData: Movie[];
-  setRecommendedData: (recommendedData: Movie[]) => void;
-  wholeData: Movie[];
-  setWholeData: (wholeData: Movie[]) => void;
-}) {
+export default function Recommended() {
+  const context = useContext(MyContext);
+
   return (
     <RecommendedWrapper>
       <h2 className="heading">Recommended for you</h2>
       <div className="movies">
-        {recommendedData?.map((item: Movie, index) => (
+        {context.recommendedData?.map((item: Movie) => (
           <RegularMovie
             movie={item}
-            data={wholeData}
-            setData={setWholeData}
-            index={wholeData?.indexOf(item)}
+            index={context.wholeData?.indexOf(item)}
             key={item.id}
           />
         ))}

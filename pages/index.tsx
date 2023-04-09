@@ -1,27 +1,13 @@
 import Head from "next/head";
 import Image from "next/image";
 import Slider from "@/components/Slider";
-import Recommended from "@/components/Recommended";
+import Regular from "@/components/Regular";
 import { useContext, useEffect, useState } from "react";
 import { MyContext } from "./_app";
 import SearchedContent from "@/components/SearchedContent";
 
-export default function Home({ movies }: { movies: Movie[] }) {
+export default function Home() {
   const context = useContext(MyContext);
-  const [wholeData, setWholeData] = useState<Movie[]>([]);
-  const [trendingData, setTrendingData] = useState<Movie[]>([]);
-  const [recommendedData, setRecommendedData] = useState<Movie[]>([]);
-  useEffect(() => {
-    (async () => {
-      const response = await fetch("/api/movies");
-      const data = await response.json();
-      setWholeData(data);
-      const filteredData = data.filter((item: Movie) => item.isTrending);
-      setTrendingData(filteredData);
-      const filteredData2 = data.filter((item: Movie) => !item.isTrending);
-      setRecommendedData(filteredData2);
-    })();
-  }, []);
 
   return (
     <>
@@ -32,19 +18,11 @@ export default function Home({ movies }: { movies: Movie[] }) {
       </Head>
       {!context?.searchResult ? (
         <>
-          <Slider
-            trendingData={trendingData}
-            setTrendingData={setTrendingData}
-          />{" "}
-          <Recommended
-            recommendedData={recommendedData}
-            setRecommendedData={setRecommendedData}
-            wholeData={wholeData}
-            setWholeData={setWholeData}
-          />
+          <Slider />
+          <Regular />
         </>
       ) : (
-        <SearchedContent wholeData={wholeData} setWholeData={setWholeData} />
+        <SearchedContent />
       )}
     </>
   );

@@ -1,21 +1,20 @@
 import styled from "styled-components";
 import Image from "next/image";
+import { useContext } from "react";
+import { MyContext } from "@/pages/_app";
 
 export default function Movie({
   movie,
-  data,
-  setData,
   index,
 }: {
   movie: Movie;
-  data: Movie[];
-  setData: (data: Movie[]) => void;
   index: number;
 }) {
+  const context = useContext(MyContext);
   const bookMark = async () => {
-    const dataClone = [...data];
+    const dataClone = [...context.wholeData];
     dataClone[index].isBookmarked = !dataClone[index].isBookmarked;
-    setData(dataClone);
+    context.setWholeData(dataClone);
     console.log(dataClone[index].id);
 
     await fetch(`/api/movies/${dataClone[index].id}`, {
@@ -129,7 +128,7 @@ const TrendingMovieWrapper = styled.div`
       }
     }
     .title {
-        color: white;
+      color: white;
       font-weight: 500;
       font-size: 15px;
       line-height: 19px;

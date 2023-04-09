@@ -1,22 +1,21 @@
 import styled from "styled-components";
 import Image from "next/image";
+import { useContext } from "react";
+import { MyContext } from "@/pages/_app";
 export default function Movie({
   movie,
-  data,
-  setData,
   index,
 }: {
   movie: Movie;
-  data: Movie[] | undefined;
-  setData: (data: Movie[]) => void;
   index: number | undefined;
 }) {
+  const context = useContext(MyContext)
   const bookMark = async () => {
-    if (data && index) {
-      const dataClone = [...data];
+    if (index) {
+      const dataClone = [...context.wholeData];
       console.log(index);
       dataClone[index].isBookmarked = !dataClone[index].isBookmarked;
-      setData(dataClone);
+      context.setWholeData(dataClone);
       console.log(dataClone[index]);
 
       await fetch(`/api/movies/${dataClone[index].id}`, {
