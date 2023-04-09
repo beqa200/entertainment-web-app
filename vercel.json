@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/movies.ts": {
+    "api/db.ts": {
       "memory": 3008,
       "maxDuration": 35
     },
