@@ -10,13 +10,13 @@ export default function Movie({
   index: number | undefined;
 }) {
   const context = useContext(MyContext)
+  console.log(movie)
   const bookMark = async () => {
-    if (index) {
+    if (index != undefined) {
       const dataClone = [...context.wholeData];
       console.log(index);
       dataClone[index].isBookmarked = !dataClone[index].isBookmarked;
       context.setWholeData(dataClone);
-      console.log(dataClone[index]);
 
       await fetch(`/api/movies/${dataClone[index].id}`, {
         method: "PUT",

@@ -3,12 +3,13 @@ import Image from "next/image";
 import Slider from "@/components/Slider";
 import Regular from "@/components/Regular";
 import { useContext, useEffect, useState } from "react";
-import { MyContext } from "./_app";
+import { MyContext } from "../_app";
 import SearchedContent from "@/components/SearchedContent";
 import { StyledHeading } from "@/styled-components";
 
-export default function Home() {
+export default function movies({ movies }: { movies: Movie[] }) {
   const context = useContext(MyContext);
+
   return (
     <>
       <Head>
@@ -18,13 +19,12 @@ export default function Home() {
       </Head>
       {!context?.searchResult ? (
         <>
-          <Slider />
-        <StyledHeading>Recommended for you</StyledHeading>
+          <StyledHeading>TV Series</StyledHeading>
 
-          <Regular data={context.recommendedData}/>
+          <Regular data={context.seriesFilter} />
         </>
       ) : (
-        <SearchedContent data={context.wholeData}/>
+        <SearchedContent data={context.seriesFilter} />
       )}
     </>
   );

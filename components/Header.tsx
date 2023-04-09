@@ -48,7 +48,13 @@ export default function Header() {
         </Link>
       </nav>
 
-      <Image src={"/image-avatar.png"} width={24} height={24} alt="avatar" />
+      <Image
+        className="avatar"
+        src={"/image-avatar.png"}
+        width={24}
+        height={24}
+        alt="avatar"
+      />
     </HeaderWrapper>
   );
 }
@@ -65,6 +71,11 @@ const HeaderWrapper = styled.header`
   nav {
     display: flex;
     gap: 24px;
+  }
+
+  .avatar {
+    border: 1px solid #ffffff;
+    border-radius: 50%;
   }
 
   .active {

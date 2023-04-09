@@ -5,6 +5,7 @@ import Regular from "@/components/Regular";
 import { useContext, useEffect, useState } from "react";
 import { MyContext } from "../_app";
 import SearchedContent from "@/components/SearchedContent";
+import { StyledHeading } from "@/styled-components";
 
 export default function movies({ movies }: { movies: Movie[] }) {
   const context = useContext(MyContext);
@@ -18,10 +19,12 @@ export default function movies({ movies }: { movies: Movie[] }) {
       </Head>
       {!context?.searchResult ? (
         <>
-          <Regular />
+          <StyledHeading>Movies</StyledHeading>
+
+          <Regular data={context.movieFilter} />
         </>
       ) : (
-        <SearchedContent />
+        <SearchedContent data={context.movieFilter} />
       )}
     </>
   );

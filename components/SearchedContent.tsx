@@ -3,12 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import RegularMovie from "./RegularMovie";
 import Movie from "./TrendingMovie";
-export default function SearchedContent() {
+export default function SearchedContent({ data }: { data: Movie[] }) {
   const [searchedData, setSearchData] = useState<Movie[]>();
   const context = useContext(MyContext);
-
   useEffect(() => {
-    const filtered = context.wholeData.filter(
+    const filtered = data.filter(
       (item) =>
         context?.searchResult?.toLocaleLowerCase() ==
         item.title.slice(0, context?.searchResult?.length).toLocaleLowerCase()

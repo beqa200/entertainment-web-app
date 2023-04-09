@@ -3,12 +3,13 @@ import Image from "next/image";
 import Slider from "@/components/Slider";
 import Regular from "@/components/Regular";
 import { useContext, useEffect, useState } from "react";
-import { MyContext } from "./_app";
+import { MyContext } from "../_app";
 import SearchedContent from "@/components/SearchedContent";
 import { StyledHeading } from "@/styled-components";
 
-export default function Home() {
+export default function movies() {
   const context = useContext(MyContext);
+
   return (
     <>
       <Head>
@@ -18,13 +19,23 @@ export default function Home() {
       </Head>
       {!context?.searchResult ? (
         <>
-          <Slider />
-        <StyledHeading>Recommended for you</StyledHeading>
+          {context.bookmarkedMovieFilter.length != 0 && (
+            <StyledHeading>Bookmarked Movies</StyledHeading>
+          )}
+          <Regular data={context.bookmarkedMovieFilter} />
+          {context.bookmarkedSeriesFilter.length != 0 && (
+            <StyledHeading>Bookmarked TV Series</StyledHeading>
+          )}
 
-          <Regular data={context.recommendedData}/>
+          <Regular data={context.bookmarkedSeriesFilter} />
         </>
       ) : (
-        <SearchedContent data={context.wholeData}/>
+        <SearchedContent
+          data={[
+            ...context.bookmarkedMovieFilter,
+            ...context.bookmarkedSeriesFilter,
+          ]}
+        />
       )}
     </>
   );
