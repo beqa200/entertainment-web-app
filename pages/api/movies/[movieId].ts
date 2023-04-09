@@ -15,13 +15,13 @@ export default async function handler(
 console.log(movie);
   if (req.method == "GET") {
     try {
-      res.status(200).send(movie);
+      res.status(200).json(movie);
     } catch (err) {
-      res.status(400).send("Bad Request");
+      res.status(400).json("Bad Request");
     }
   } else if (req.method == "PUT") {
     movie.isBookmarked = req.body.isBookmarked;
     await movie.save();
-    res.status(200).send(movie);
+    res.status(200).json(movie);
   }
 }
