@@ -22,7 +22,7 @@ export default function Search() {
             : ""
         }`}
         onChange={(e) => {
-          context?.setSearchResult(e.target.value);
+          context.setSearchResult(e.target.value);
         }}
       />
     </SearchWrapper>

@@ -22,7 +22,7 @@ export default function Recommended({
             movie={item}
             data={wholeData}
             setData={setWholeData}
-            index={wholeData.indexOf(item)}
+            index={wholeData?.indexOf(item)}
             key={item.id}
           />
         ))}

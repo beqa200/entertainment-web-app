@@ -7,40 +7,45 @@ export default function Movie({
   index,
 }: {
   movie: Movie;
-  data: Movie[];
+  data: Movie[] | undefined;
   setData: (data: Movie[]) => void;
-  index: number;
+  index: number | undefined;
 }) {
   const bookMark = async () => {
-    const dataClone = [...data];
-    console.log(index);
-    dataClone[index].isBookmarked = !dataClone[index].isBookmarked;
-    setData(dataClone);
-    console.log(dataClone[index]);
+    if (data && index) {
+      const dataClone = [...data];
+      console.log(index);
+      dataClone[index].isBookmarked = !dataClone[index].isBookmarked;
+      setData(dataClone);
+      console.log(dataClone[index]);
 
-    await fetch(`/api/movies/${dataClone[index].id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ isBookmarked: dataClone[index].isBookmarked }),
-    });
+      await fetch(`/api/movies/${dataClone[index].id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ isBookmarked: dataClone[index].isBookmarked }),
+      });
+    }
   };
 
-  
   return (
     <RegularMovieWrapper>
-      {movie ? <Image
-        className="cover"
-        src={
-          movie.isTrending
-            ? movie.thumbnail.trending.small.replace("./assets", "")
-            : movie.thumbnail.regular.small.replace("./assets", "")
-        }
-        width={164}
-        height={110}
-        alt={movie.title}
-      />: <img className="cover" src="/logo.svg"/>}
+      {movie ? (
+        <Image
+          className="cover"
+          src={
+            movie.isTrending
+              ? movie.thumbnail.trending.small.replace("./assets", "")
+              : movie.thumbnail.regular.small.replace("./assets", "")
+          }
+          width={164}
+          height={110}
+          alt={movie.title}
+        />
+      ) : (
+        <img className="cover" src="/logo.svg" />
+      )}
 
       <div className="bookmark" onClick={bookMark}>
         <Image
