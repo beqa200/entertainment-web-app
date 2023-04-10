@@ -10,7 +10,6 @@ export default function Movie({
   index: number | undefined;
 }) {
   const context = useContext(MyContext)
-  console.log(movie)
   const bookMark = async () => {
     if (index != undefined) {
       const dataClone = [...context.wholeData];
