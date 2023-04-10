@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
-import { connectDB, movieSchema } from "../_db";
+import { connectDB, Movie } from "../_db";
+
 
 connectDB();
-const Movie = mongoose.models.Movie || mongoose.model("Movie", movieSchema);
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,3 +18,5 @@ export default async function handler(
     }
   }
 }
+
+

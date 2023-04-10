@@ -1,19 +1,16 @@
 import mongoose from "mongoose";
 
 export async function connectDB() {
-  if (process.env.DB_URL) {
-    await mongoose.connect(process.env.DB_URL);
+  if (!process.env.DB_URL) {
+    throw new Error("Database URL is not defined in environment variables!");
   }
 
-  const db = mongoose.connection;
-
-  db.once("open", () => {
+  try {
+    await mongoose.connect(process.env.DB_URL);
     console.log("Database connected!");
-  });
-
-  db.on("error", (error) => {
+  } catch (error) {
     console.error("Error connecting to database:", error);
-  });
+  }
 }
 
 const thumbnailSchema = new mongoose.Schema({
@@ -23,6 +20,7 @@ const thumbnailSchema = new mongoose.Schema({
   },
   medium: {
     type: String,
+    required: true,
   },
   large: {
     type: String,
@@ -36,14 +34,8 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   thumbnail: {
-    trending: {
-      type: thumbnailSchema,
-      required: false,
-    },
-    regular: {
-      type: thumbnailSchema,
-      required: true,
-    },
+    trending: thumbnailSchema,
+    regular: thumbnailSchema,
   },
   year: {
     type: Number,
@@ -70,9 +62,8 @@ const movieSchema = new mongoose.Schema({
 movieSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
-
     delete returnedObject._id;
   },
 });
 
-export { movieSchema };
+export const Movie = mongoose.model("Movie", movieSchema);
