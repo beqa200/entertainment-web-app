@@ -4,6 +4,7 @@ import Image from "next/image";
 import Movie from "./TrendingMovie";
 import TrendingMovie from "./TrendingMovie";
 import { MyContext } from "@/pages/_app";
+import { StyledHeading } from "@/styled-components";
 export default function Slider() {
   const scrollableRef = useRef<HTMLDivElement>(null);
   const [isClicked, setIsClicked] = useState(false);
@@ -26,7 +27,7 @@ export default function Slider() {
 
   return (
     <SliderWrapper>
-      <h2>Trending</h2>
+      <StyledHeading>Trending</StyledHeading>
       <div
         className="slider"
         ref={scrollableRef}
@@ -45,13 +46,13 @@ export default function Slider() {
 const SliderWrapper = styled.section`
   margin-top: 26px;
   height: 180px;
-  h2 {
-    font-size: 20px;
-    line-height: 25px;
-    font-weight: 300;
-    letter-spacing: -0.3125px;
-    color: #ffffff;
+
+  
+  @media (min-width: 768px) {
+    min-height: 300px;
   }
+
+ 
 
   .slider {
     display: flex;
@@ -63,5 +64,14 @@ const SliderWrapper = styled.section`
     padding: 0 16px;
     overflow-x: scroll;
     margin-top: 16px;
+
+    @media (min-width: 768px) {
+    min-height: 230px;
+  }
+
+    @media (min-width: 768px) {
+      padding: 0 25px;
+      margin-top: 24px;
+    }
   }
 `;

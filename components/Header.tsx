@@ -7,7 +7,13 @@ export default function Header() {
 
   return (
     <HeaderWrapper>
-      <Image src={"/logo.svg"} width={32} height={25.5} alt="logo" />
+      <Image
+        className="logo"
+        src={"/logo.svg"}
+        width={25}
+        height={20}
+        alt="logo"
+      />
 
       <nav>
         <Link href="/">
@@ -68,14 +74,41 @@ const HeaderWrapper = styled.header`
   align-items: center;
   justify-content: space-between;
 
+  @media (min-width: 768px) {
+   width: 93%;
+   margin: 23px auto;
+   border-radius: 10px;
+  }
+
+  @media (min-width: 768px) {
+    .logo {
+      width: 32px;
+      height: 25.6px;
+    }
+  }
+
   nav {
     display: flex;
     gap: 24px;
+
+    @media (min-width: 768px) {
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 
   .avatar {
     border: 1px solid #ffffff;
     border-radius: 50%;
+  }
+
+  @media (min-width: 768px) {
+    .avatar {
+      width: 32px;
+      height: 32px;
+    }
   }
 
   .active {

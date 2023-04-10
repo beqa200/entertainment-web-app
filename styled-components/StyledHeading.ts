@@ -7,6 +7,10 @@ const StyledHeading = styled.h2`
   letter-spacing: -0.3125px;
   margin-top: 20px;
   color: #ffffff;
+
+  @media (min-width: 768px) {
+    font-size: 32px;
+  }
 `;
 
 export default StyledHeading;

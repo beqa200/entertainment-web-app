@@ -12,7 +12,6 @@ export default function Movie({
 }) {
   const context = useContext(MyContext);
   const bookMark = async () => {
-
     const dataClone = [...context.wholeData];
     dataClone[index].isBookmarked = !dataClone[index].isBookmarked;
     context.setWholeData(dataClone);
@@ -28,14 +27,18 @@ export default function Movie({
   return (
     <TrendingMovieWrapper>
       <Image
-        className="cover"
-        src={
-          movie.isTrending
-            ? movie.thumbnail.trending.small.replace("./assets", "")
-            : movie.thumbnail.regular.small.replace("./assets", "")
-        }
+        className="cover mobile"
+        src={movie.thumbnail.trending.small.replace("./assets", "")}
         width={240}
         height={160}
+        alt={movie.title}
+      />
+
+      <Image
+        className="cover tablet"
+        src={movie.thumbnail.trending.large.replace("./assets", "")}
+        width={470}
+        height={230}
         alt={movie.title}
       />
 
@@ -84,6 +87,23 @@ const TrendingMovieWrapper = styled.div`
   border-radius: 8px;
   position: relative;
 
+  .tablet {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    min-width: 470px;
+    height: 230px;
+
+    .mobile {
+      display: none;
+    }
+
+    .tablet {
+      display: block;
+    }
+  }
+
   .cover {
     position: absolute;
     z-index: -1;
@@ -119,6 +139,10 @@ const TrendingMovieWrapper = styled.div`
       color: #ffffff;
       gap: 8px;
 
+      @media (min-width: 768px) {
+        font-size: 15px;
+      }
+
       .circle {
         width: 3.5px;
         height: 3px;
@@ -132,6 +156,10 @@ const TrendingMovieWrapper = styled.div`
       font-size: 15px;
       line-height: 19px;
       margin-top: 5px;
+
+      @media (min-width: 768px) {
+        font-size: 24px;
+      }
     }
   }
 `;

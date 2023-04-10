@@ -38,5 +38,9 @@ const RecommendedWrapper = styled.section`
     gap: 15px;
     margin-top: 24px;
     margin-bottom: 61px;
+
+    @media (min-width: 768px) {
+      gap: 29px;
+    }
   }
 `;

@@ -9,7 +9,7 @@ export default function Movie({
   movie: Movie;
   index: number | undefined;
 }) {
-  const context = useContext(MyContext)
+  const context = useContext(MyContext);
   const bookMark = async () => {
     if (index != undefined) {
       const dataClone = [...context.wholeData];
@@ -29,21 +29,21 @@ export default function Movie({
 
   return (
     <RegularMovieWrapper>
-      {movie ? (
-        <Image
-          className="cover"
-          src={
-            movie.isTrending
-              ? movie.thumbnail.trending.small.replace("./assets", "")
-              : movie.thumbnail.regular.small.replace("./assets", "")
-          }
-          width={164}
-          height={110}
-          alt={movie.title}
-        />
-      ) : (
-        <img className="cover" src="/logo.svg" />
-      )}
+      <Image
+        className="cover mobile"
+        src={movie.thumbnail.regular.medium.replace("./assets", "")}
+        width={164}
+        height={110}
+        alt={movie.title}
+      />
+
+      <Image
+        className="cover tablet"
+        src={movie.thumbnail.regular.medium.replace("./assets", "")}
+        width={220}
+        height={140}
+        alt={movie.title}
+      />
 
       <div className="bookmark" onClick={bookMark}>
         <Image
@@ -84,18 +84,35 @@ export default function Movie({
 }
 
 const RegularMovieWrapper = styled.div`
-  width: 164px;
-  height: 160px;
+  width: 220px;
+  height: 190px;
   background-size: cover;
   border-radius: 8px;
   position: relative;
 
+  .tablet {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .mobile {
+      display: none;
+    }
+
+    .tablet {
+      display: block;
+    }
+  }
+
   .cover {
-    /* position: absolute; */
     z-index: -1;
     width: 100%;
     height: 110px;
     border-radius: 8px;
+
+    @media (min-width: 768px) {
+      height: 140px;
+    }
   }
 
   .bookmark {
@@ -112,9 +129,9 @@ const RegularMovieWrapper = styled.div`
   }
 
   .info {
-    /* position: absolute; */
     bottom: 16px;
     left: 16px;
+
     .details {
       display: flex;
       align-items: center;
@@ -124,6 +141,11 @@ const RegularMovieWrapper = styled.div`
       line-height: 15px;
       color: #ffffff;
       gap: 8px;
+
+      @media (min-width: 768px) {
+        font-size: 13px;
+        margin-top: 8px;
+      }
 
       .circle {
         width: 3.5px;
@@ -138,6 +160,10 @@ const RegularMovieWrapper = styled.div`
       font-size: 15px;
       line-height: 19px;
       margin-top: 5px;
+
+      @media (min-width: 768px) {
+        font-size: 18px;
+      }
     }
   }
 `;

@@ -36,7 +36,7 @@ const SearchWrapper = styled.div`
   gap: 16px;
   margin-top: 26px;
   input {
-    width: 214px;
+    width: 100%;
     height: 100%;
     background-color: transparent;
     font-weight: 300;
@@ -50,8 +50,15 @@ const SearchWrapper = styled.div`
     &:focus {
       outline: none;
     }
-  }
 
-  img {
+    @media (min-width: 768px) {
+      font-size: 24px;
+    }
+  }
+  @media (min-width: 768px) {
+    img {
+      width: 32px;
+      height: 32px;
+    }
   }
 `;

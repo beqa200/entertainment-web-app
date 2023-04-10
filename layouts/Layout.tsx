@@ -1,5 +1,6 @@
 import Search from "@/components/Search";
 import GlobalStyles from "@/styled-components/GlobalStyles";
+import styled from "styled-components";
 import Header from "../components/Header";
 
 type LayoutProps = {
@@ -12,10 +13,18 @@ export default function Layout({ children }: LayoutProps) {
       <GlobalStyles />
       <Header />
 
-      <main style={{ padding: "0 16px" }}>
+      <StyledMain>
         <Search />
         {children}
-      </main>
+      </StyledMain>
     </>
   );
 }
+
+const StyledMain = styled.main`
+  padding: 0 16px;
+
+  @media (min-width: 768px) {
+    padding: 0 25px;
+  }
+`;
