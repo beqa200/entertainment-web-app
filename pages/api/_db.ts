@@ -28,7 +28,7 @@ const thumbnailSchema = new mongoose.Schema({
   },
 });
 
-const movieSchema = new mongoose.Schema({
+export const movieSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -59,11 +59,13 @@ const movieSchema = new mongoose.Schema({
   },
 });
 
-movieSchema.set("toJSON", {
+  movieSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
   },
 });
 
-export const Movie = mongoose.model("Movie", movieSchema);
+export default movieSchema;
+
+

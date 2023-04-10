@@ -37,7 +37,6 @@ export default function Movie({
         width={240}
         height={160}
         alt={movie.title}
-        blurDataURL="/logo.svg"
       />
 
       <div className="bookmark" onClick={bookMark}>

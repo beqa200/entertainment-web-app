@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
-import { connectDB, Movie } from "../_db";
+import movieSchema, { connectDB } from "../_db";
 
 connectDB();
+
+export const Movie = mongoose.model("Movie", movieSchema);
 
 export default async function handler(
   req: NextApiRequest,
