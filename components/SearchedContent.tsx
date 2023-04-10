@@ -2,7 +2,7 @@ import { MyContext } from "@/pages/_app";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import RegularMovie from "./RegularMovie";
-import Movie from "./TrendingMovie";
+
 export default function SearchedContent({ data }: { data: Movie[] }) {
   const [searchedData, setSearchData] = useState<Movie[]>();
   const context = useContext(MyContext);
