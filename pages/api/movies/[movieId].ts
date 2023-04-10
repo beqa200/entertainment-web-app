@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
-import { connectDB, Movie } from "../_db";
+import { connectDB, Movie } from "../db";
 
 connectDB();
+
 
 
 export default async function handler(

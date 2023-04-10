@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export async function connectDB() {
+ async function connectDB() {
   if (!process.env.DB_URL) {
     throw new Error("Database URL is not defined in environment variables!");
   }
@@ -20,7 +20,7 @@ const thumbnailSchema = new mongoose.Schema({
   },
   medium: {
     type: String,
-    required: true,
+    required: false,
   },
   large: {
     type: String,
@@ -67,4 +67,7 @@ const movieSchema = new mongoose.Schema({
 });
 
 
-export const Movie = mongoose.model("Movie", movieSchema);
+const Movie = mongoose.models.Movie || mongoose.model("Movie", movieSchema);
+
+
+export { connectDB, Movie };

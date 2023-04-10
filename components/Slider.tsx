@@ -35,7 +35,7 @@ export default function Slider() {
         }}
       >
         {context.trendingData?.map((item: Movie, index) => (
-          <TrendingMovie movie={item} index={context.wholeData.indexOf(item)} key={item.id} />
+          <TrendingMovie movie={item} index={context.wholeData?.findIndex(obj => obj.id === item.id)} key={item.id} />
         ))}
       </div>
     </SliderWrapper>
