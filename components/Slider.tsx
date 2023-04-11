@@ -31,12 +31,21 @@ export default function Slider() {
       <div
         className="slider"
         ref={scrollableRef}
-        onClick={() => {
-          setIsClicked(true);
+       
+        onMouseOver={() => {
+          setIsClicked(true)
+        }}
+
+        onMouseOut={() => {
+          setIsClicked(false)
         }}
       >
         {context.trendingData?.map((item: Movie, index) => (
-          <TrendingMovie movie={item} index={context.wholeData?.findIndex(obj => obj.id === item.id)} key={item.id} />
+          <TrendingMovie
+            movie={item}
+            index={context.wholeData?.findIndex((obj) => obj.id === item.id)}
+            key={item.id}
+          />
         ))}
       </div>
     </SliderWrapper>
@@ -47,12 +56,9 @@ const SliderWrapper = styled.section`
   margin-top: 26px;
   height: 180px;
 
-  
   @media (min-width: 768px) {
     min-height: 270px;
   }
-
- 
 
   .slider {
     display: flex;
@@ -64,14 +70,19 @@ const SliderWrapper = styled.section`
     padding: 0 16px;
     overflow-x: scroll;
     margin-top: 16px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     @media (min-width: 768px) {
-    min-height: 230px;
-  }
-
-    @media (min-width: 768px) {
+      min-height: 230px;
       padding: 0 25px;
-      
+    }
+
+    @media (min-width: 1440px) {
+      left: 128px;
+      padding: 0 35px;
+      width: 92%;
     }
   }
 `;

@@ -42,5 +42,10 @@ const RecommendedWrapper = styled.section`
     @media (min-width: 768px) {
       gap: 29px;
     }
+
+    @media (min-width: 1440px) {
+      gap: 50px;
+      padding-right: 20px;
+    }
   }
 `;

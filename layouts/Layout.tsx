@@ -9,7 +9,7 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <>
+    <StyledWrapper>
       <GlobalStyles />
       <Header />
 
@@ -17,14 +17,23 @@ export default function Layout({ children }: LayoutProps) {
         <Search />
         {children}
       </StyledMain>
-    </>
+    </StyledWrapper>
   );
 }
 
 const StyledMain = styled.main`
   padding: 0 16px;
-
   @media (min-width: 768px) {
     padding: 0 25px;
+  }
+  @media (min-width: 1440px) {
+    width: 90%;
+    margin-left: 140px;
+  }
+`;
+
+const StyledWrapper = styled.div`
+  @media (min-width: 1440px) {
+    display: flex;
   }
 `;

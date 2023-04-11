@@ -35,7 +35,13 @@ const SearchWrapper = styled.div`
   align-items: center;
   gap: 16px;
   margin-top: 26px;
+
+  @media (min-width: 1440px) {
+    margin-top: 65px;
+  }
+
   input {
+    box-sizing: content-box;
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -44,11 +50,16 @@ const SearchWrapper = styled.div`
     line-height: 20px;
     color: #ffffff;
     mix-blend-mode: normal;
-    opacity: 0.5;
+    padding-bottom: 15px;
     border: none;
+    caret-color: #fc4747;
+    &::placeholder {
+      opacity: 0.5;
+    }
 
     &:focus {
       outline: none;
+      border-bottom: 1px solid #5a698f;
     }
 
     @media (min-width: 768px) {

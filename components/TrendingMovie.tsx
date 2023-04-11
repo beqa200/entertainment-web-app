@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MyContext } from "@/pages/_app";
 
 export default function Movie({
@@ -24,8 +24,17 @@ export default function Movie({
       body: JSON.stringify({ isBookmarked: dataClone[index].isBookmarked }),
     });
   };
+
+  const [isHover, setIsHover] = useState(false);
+  const [isHoverbookmark, setIsHoverbookmark] = useState(false);
+
   return (
-    <TrendingMovieWrapper>
+    <TrendingMovieWrapper
+      onMouseOver={() => setIsHover(true)}
+      onMouseOut={() => {
+        setIsHover(false);
+      }}
+    >
       <Image
         className="cover mobile"
         src={movie.thumbnail.trending.small.replace("./assets", "")}
@@ -42,7 +51,23 @@ export default function Movie({
         alt={movie.title}
       />
 
-      <div className="bookmark" onClick={bookMark}>
+      {isHover && !isHoverbookmark && (
+        <>
+          <div className="play">
+            <Image src={"/icon-play.svg"} width={30} height={30} alt={"play"} />
+            <p>Play</p>
+          </div>
+          <div className="hover"></div>
+        </>
+      )}
+
+      <div
+        className="bookmark"
+        onClick={bookMark}
+        style={isHoverbookmark ? { backgroundColor: "white" } : {}}
+        onMouseOver={() => setIsHoverbookmark(true)}
+        onMouseOut={() => setIsHoverbookmark(false)}
+      >
         <Image
           src={
             movie.isBookmarked
@@ -52,6 +77,14 @@ export default function Movie({
           width={11}
           height={14}
           alt="not saved"
+          style={
+            isHoverbookmark
+              ? {
+                  filter:
+                    "invert(0%) sepia(12%) saturate(7478%) hue-rotate(130deg) brightness(4%) contrast(101%)",
+                }
+              : {}
+          }
         />
       </div>
 
@@ -86,7 +119,8 @@ const TrendingMovieWrapper = styled.div`
   background-size: cover;
   border-radius: 8px;
   position: relative;
-
+  cursor: pointer;
+  
   .tablet {
     display: none;
   }
@@ -102,6 +136,40 @@ const TrendingMovieWrapper = styled.div`
     .tablet {
       display: block;
     }
+  }
+
+  .play {
+    display: none;
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    padding: 9px 9px 10px 9px;
+    background: rgba(255, 255, 255, 0.25);
+    width: 117px;
+    mix-blend-mode: normal;
+    border-radius: 28.5px;
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    p {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 23px;
+      color: #ffffff;
+    }
+  }
+
+  .hover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    border-radius: 9px;
   }
 
   .cover {
@@ -123,6 +191,7 @@ const TrendingMovieWrapper = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+    z-index: 10;
   }
 
   .info {

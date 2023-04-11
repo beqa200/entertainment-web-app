@@ -75,16 +75,23 @@ const HeaderWrapper = styled.header`
   justify-content: space-between;
 
   @media (min-width: 768px) {
-   width: 93%;
-   margin: 23px auto;
-   border-radius: 10px;
-  }
+    width: 93%;
+    margin: 23px auto;
+    border-radius: 10px;
 
-  @media (min-width: 768px) {
     .logo {
       width: 32px;
       height: 25.6px;
     }
+  }
+
+  @media (min-width: 1440px) {
+    flex-direction: column;
+    width: 96px;
+    height: 93%;
+    position: fixed;
+    padding: 35px 31px;
+    left: 32px;
   }
 
   nav {
@@ -95,6 +102,15 @@ const HeaderWrapper = styled.header`
       img {
         width: 20px;
         height: 20px;
+      }
+    }
+    @media (min-width: 1440px) {
+      flex-direction: column;
+
+      img {
+        &:hover {
+          filter: invert(41%) sepia(82%) saturate(3512%) hue-rotate(337deg) brightness(107%) contrast(98%);
+        }
       }
     }
   }

@@ -6,13 +6,15 @@ const StyledForm = styled.form`
   border-radius: 10px;
   width: 327px;
 
-  
   @media (min-width: 768px) {
     min-width: 400px;
     margin-top: -200px;
     border-radius: 20px;
   }
 
+  @media (min-width: 1440px) {
+    margin-top: 0px;
+  }
 
   h1 {
     font-weight: 300;
@@ -27,32 +29,32 @@ const StyledForm = styled.form`
     width: 90%;
     input {
       width: 100%;
-    border: none;
-    background-color: transparent;
-    border-bottom: 1px solid #5a698f;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 19px;
-    color: #ffffff;
-    padding: 18px 16px;
-    opacity: 0.5;
-    margin-top: 8px;
-    &:focus {
-      outline: none;
+      border: none;
+      background-color: transparent;
+      border-bottom: 1px solid #5a698f;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 19px;
+      color: #ffffff;
+      padding: 18px 16px;
+      opacity: 0.5;
+      margin-top: 8px;
+      caret-color: #fc4747;
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .error {
+      color: #fc4747;
+      font-weight: 300;
+      font-size: 13px;
+      opacity: 0.9;
+      position: absolute;
+      top: 50%;
+      right: 10px;
     }
   }
-
-  .error {
-    color: #FC4747;
-    font-weight: 300;
-    font-size: 13px;
-    opacity: 0.9;
-    position: absolute;
-    top: 50%;
-    right: 10px;
-  }
-  }
-  
 
   button {
     display: block;
@@ -67,6 +69,11 @@ const StyledForm = styled.form`
     color: #ffffff;
     border: none;
     margin: 40px auto 0;
+
+    &:hover {
+      background: #ffffff;
+      color: #161d2f;
+    }
   }
 
   .text {
@@ -77,9 +84,9 @@ const StyledForm = styled.form`
     color: #ffffff;
     margin-top: 24px;
     text-align: center;
-    
+
     a {
-        color: #FC4747;
+      color: #fc4747;
     }
   }
 `;
