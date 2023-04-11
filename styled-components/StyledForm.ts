@@ -5,6 +5,15 @@ const StyledForm = styled.form`
   padding: 24px;
   border-radius: 10px;
   width: 327px;
+
+  
+  @media (min-width: 768px) {
+    min-width: 400px;
+    margin-top: -200px;
+    border-radius: 20px;
+  }
+
+
   h1 {
     font-weight: 300;
     font-size: 32px;
@@ -13,8 +22,11 @@ const StyledForm = styled.form`
     color: #ffffff;
   }
 
-  input {
+  .input-wrapper {
+    position: relative;
     width: 90%;
+    input {
+      width: 100%;
     border: none;
     background-color: transparent;
     border-bottom: 1px solid #5a698f;
@@ -31,13 +43,16 @@ const StyledForm = styled.form`
   }
 
   .error {
-    color: red;
-    font-style: italic;
+    color: #FC4747;
     font-weight: 300;
-    font-size: 12px;
+    font-size: 13px;
     opacity: 0.9;
-    margin: 5px 0px 0px 10px
+    position: absolute;
+    top: 50%;
+    right: 10px;
   }
+  }
+  
 
   button {
     display: block;

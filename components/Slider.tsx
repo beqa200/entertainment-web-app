@@ -49,7 +49,7 @@ const SliderWrapper = styled.section`
 
   
   @media (min-width: 768px) {
-    min-height: 300px;
+    min-height: 270px;
   }
 
  
@@ -71,7 +71,7 @@ const SliderWrapper = styled.section`
 
     @media (min-width: 768px) {
       padding: 0 25px;
-      margin-top: 24px;
+      
     }
   }
 `;

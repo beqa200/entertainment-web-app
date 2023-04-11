@@ -9,6 +9,10 @@ const FormWrapper = styled.div`
   background-image: url("./logo.svg");
   background-repeat: no-repeat;
   background-position: center top 48px;
+
+  @media (min-width: 768px) {
+    background-position: center top 80px;
+  }
 `;
 
 export default FormWrapper;

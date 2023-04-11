@@ -4,19 +4,12 @@ import Link from "next/link";
 import { ReactElement } from "react";
 import { useForm } from "react-hook-form";
 
-type FormValues = {
-  email: string;
-  password: string;
-  repeatPassword: string;
-};
-
 export default function SignUp() {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-    trigger,
   } = useForm<FormValues>();
 
   const onSubmit = () => {
@@ -27,40 +20,52 @@ export default function SignUp() {
     <FormWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <h1>Sign Up</h1>
-        <input
-          placeholder="Email address"
-          {...register("email", {
-            required: { value: true, message: "Email is required" },
-            pattern: {
-              value: /^([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})$/,
-              message: "Invalid email",
-            },
-          })}
-        />
-        {errors?.email && <p className="error">{errors.email.message}</p>}
-        <input
-          placeholder="Password"
-          type={"password"}
-          {...register("password", {
-            required: { value: true, message: "Password is required" },
-            minLength: {
-              value: 5,
-              message: "More than 5 character",
-            },
-          })}
-        />
-        {errors.password && <p className="error">{errors.password.message}</p>}
-        <input
-          placeholder="Repeat Password"
-          type={"password"}
-          {...register("repeatPassword", {
-            validate: (value, formValues) =>
-              value === formValues.password || "Passwords do not match",
-          })}
-        />
-        {errors.repeatPassword && !errors.password && (
-          <p className="error">{errors.repeatPassword.message}</p>
-        )}
+        <div className="input-wrapper">
+          <input
+            placeholder="Email address"
+            {...register("email", {
+              required: { value: true, message: "Can`t be empty" },
+              pattern: {
+                value: /^([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})$/,
+                message: "Invalid email",
+              },
+            })}
+            style={errors?.email ? {borderBottom: "1px solid #FC4747"}: {}}
+          />
+          {errors?.email && <p className="error">{errors.email.message}</p>}
+        </div>
+        <div className="input-wrapper">
+          <input
+            placeholder="Password"
+            type={"password"}
+            {...register("password", {
+              required: { value: true, message: "Can`t be empty" },
+              minLength: {
+                value: 5,
+                message: "More than 5 character",
+              },
+            })}
+            style={errors?.password ? {borderBottom: "1px solid #FC4747"}: {}}
+          />
+          {errors.password && (
+            <p className="error">{errors.password.message}</p>
+          )}
+        </div>
+        <div className="input-wrapper">
+          <input
+            placeholder="Repeat Password"
+            type={"password"}
+            {...register("repeatPassword", {
+              validate: (value, formValues) =>
+                value === formValues.password || "Invalid",
+            })}
+            style={errors?.repeatPassword ? {borderBottom: "1px solid #FC4747"}: {}}
+          />
+          {errors.repeatPassword && !errors.password && (
+            <p className="error">{errors.repeatPassword.message}</p>
+          )}
+        </div>
+
         <button
           type="submit"
           onClick={() => {
