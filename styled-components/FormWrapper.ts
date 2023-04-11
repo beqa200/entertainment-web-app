@@ -13,6 +13,8 @@ const FormWrapper = styled.div`
   @media (min-width: 768px) {
     background-position: center top 80px;
   }
+
+  
 `;
 
 export default FormWrapper;

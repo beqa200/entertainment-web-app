@@ -32,9 +32,15 @@ export default function Search() {
 const SearchWrapper = styled.div`
   height: 20px;
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 16px;
   margin-top: 26px;
+
+  @media (min-width: 768px) {
+    img {
+      margin-top: -5px;
+    }
+  }
 
   @media (min-width: 1440px) {
     margin-top: 65px;

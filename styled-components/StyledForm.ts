@@ -10,6 +10,7 @@ const StyledForm = styled.form`
     min-width: 400px;
     margin-top: -200px;
     border-radius: 20px;
+    padding: 32px;
   }
 
   @media (min-width: 1440px) {
@@ -26,7 +27,7 @@ const StyledForm = styled.form`
 
   .input-wrapper {
     position: relative;
-    width: 90%;
+    width: 100%;
     input {
       width: 100%;
       border: none;
@@ -58,7 +59,7 @@ const StyledForm = styled.form`
 
   button {
     display: block;
-    width: 90%;
+    width: 100%;
     height: 48px;
     background: #fc4747;
     border-radius: 6px;
