@@ -44,7 +44,7 @@ const RecommendedWrapper = styled.section`
     }
 
     @media (min-width: 1440px) {
-      gap: 50px;
+      gap: 35px;
       padding-right: 20px;
     }
   }
