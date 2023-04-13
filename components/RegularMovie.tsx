@@ -11,19 +11,23 @@ export default function Movie({
 }) {
   const context = useContext(MyContext);
   const bookMark = async () => {
-    if (index != undefined) {
+    const token = localStorage.getItem("auth-token");
+    if (index != undefined && token) {
       const dataClone = [...context.wholeData];
-      console.log(index);
       dataClone[index].isBookmarked = !dataClone[index].isBookmarked;
       context.setWholeData(dataClone);
 
-      await fetch(`/api/movies/${dataClone[index].id}`, {
+      const response = await fetch(`/api/movies/${dataClone[index].id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "auth-token": token,
         },
-        body: JSON.stringify({ isBookmarked: dataClone[index].isBookmarked }),
+        body: JSON.stringify({
+          isBookmarked: dataClone[index].isBookmarked,
+        }),
       });
+      const message = await response.json();
     }
   };
   const [isHover, setIsHover] = useState(false);
@@ -68,7 +72,13 @@ export default function Movie({
           <div className="hover"></div>
         </>
       )}
-      <div className="bookmark" style={isHoverbookmark ? {backgroundColor: "white"} : {}} onClick={bookMark} onMouseOver={() => setIsHoverbookmark(true)} onMouseOut={() => setIsHoverbookmark(false)}>
+      <div
+        className="bookmark"
+        style={isHoverbookmark ? { backgroundColor: "white" } : {}}
+        onClick={bookMark}
+        onMouseOver={() => setIsHoverbookmark(true)}
+        onMouseOut={() => setIsHoverbookmark(false)}
+      >
         <Image
           src={
             movie.isBookmarked
@@ -78,7 +88,14 @@ export default function Movie({
           width={11}
           height={14}
           alt="not saved"
-          style={isHoverbookmark ? {filter: "invert(0%) sepia(12%) saturate(7478%) hue-rotate(130deg) brightness(4%) contrast(101%)"} : {}}
+          style={
+            isHoverbookmark
+              ? {
+                  filter:
+                    "invert(0%) sepia(12%) saturate(7478%) hue-rotate(130deg) brightness(4%) contrast(101%)",
+                }
+              : {}
+          }
         />
       </div>
 

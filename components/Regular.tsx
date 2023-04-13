@@ -6,7 +6,6 @@ import Movie from "./TrendingMovie";
 
 export default function Recommended({data}: {data: Movie[]}) {
   const context = useContext(MyContext);
-console.log(data)
   return (
     <RecommendedWrapper>
       <div className="movies">

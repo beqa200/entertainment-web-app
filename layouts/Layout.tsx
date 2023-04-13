@@ -1,5 +1,7 @@
 import Search from "@/components/Search";
 import GlobalStyles from "@/styled-components/GlobalStyles";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 
@@ -8,6 +10,13 @@ type LayoutProps = {
 };
 
 export default function Layout({ children }: LayoutProps) {
+  const router = useRouter()
+  useEffect(() => {
+    const token = localStorage.getItem("auth-token");
+    if(!token) {
+      router.push("/login")
+    }
+  },[router])
   return (
     <StyledWrapper>
       <GlobalStyles />

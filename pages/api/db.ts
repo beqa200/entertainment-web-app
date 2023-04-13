@@ -59,15 +59,40 @@ const movieSchema = new mongoose.Schema({
   },
 });
 
- movieSchema.set("toJSON", {
+const userSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  bookmarkedMovies: {
+    type: Array,
+    required: true
+  }
+})
+
+
+movieSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
   },
 });
 
+userSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v
+  },
+});
+
 
 const Movie = mongoose.models.Movie || mongoose.model("Movie", movieSchema);
 
+const User = mongoose.models.User || mongoose.model("User", userSchema)
 
-export { connectDB, Movie };
+export { connectDB, Movie, User };

@@ -27,7 +27,7 @@ export const MyContext = createContext<contextProps>({
   setMovieFilter: () => {},
   setSeriesFilter: () => {},
   setBookmarkedMovieFilter: () => {},
-  setBookmarkedSeriesFilter: () => {}
+  setBookmarkedSeriesFilter: () => {},
 });
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
@@ -38,16 +38,69 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [recommendedData, setRecommendedData] = useState<Movie[]>([]);
   const [movieFilter, setMovieFilter] = useState<Movie[]>([]);
   const [seriesFilter, setSeriesFilter] = useState<Movie[]>([]);
-  const [bookmarkedMovieFilter, setBookmarkedMovieFilter] = useState<Movie[]>([]);
-  const [bookmarkedSeriesFilter, setBookmarkedSeriesFilter] = useState<Movie[]>([]);
+  const [bookmarkedMovieFilter, setBookmarkedMovieFilter] = useState<Movie[]>(
+    []
+  );
+  const [bookmarkedSeriesFilter, setBookmarkedSeriesFilter] = useState<Movie[]>(
+    []
+  );
+  // const [bookmarkedIds, setBookmarkedIds] = useState([]);
+  const router = useRouter();
 
-  const router = useRouter();  
-  
+  // useEffect(() => {
+  //   const token = localStorage.getItem("auth-token");
+  //   if (token)
+  //     (async () => {
+  //       const response = await fetch("/api/movies/bookmarked", {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           "auth-token": token,
+  //         },
+  //       });
+  //       const bookmarkedIds = await response.json();
+  //     })();
+  // }, [router]);
+
   useEffect(() => {
     (async () => {
       const response = await fetch("/api/movies");
       const data = await response.json();
-      setWholeData(data);
+
+      const token = localStorage.getItem("auth-token");
+      if (token) {
+        const response = await fetch("/api/movies/bookmarked", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": token,
+          },
+        });
+        const bookmarkedIds = await response.json();
+
+        const transfromedData = data.map((item: Movie) => {
+          if (bookmarkedIds.find((id: string) => item.id == id)) {
+            item.isBookmarked = true;
+          } else {
+            item.isBookmarked = false;
+          }
+          return item;
+        });
+        setWholeData(transfromedData);
+        const filteredData5 = data.filter(
+          (item: Movie) =>
+            item.category == "Movie" &&
+            bookmarkedIds.find((id: string) => item.id == id)
+        );
+        setBookmarkedMovieFilter(filteredData5);
+        const filteredData6 = data.filter(
+          (item: Movie) =>
+            item.category == "TV Series" &&
+            bookmarkedIds.find((id: string) => item.id == id)
+        );
+        setBookmarkedSeriesFilter(filteredData6);
+      }
+
       const filteredData = data.filter((item: Movie) => item.isTrending);
       setTrendingData(filteredData);
       const filteredData2 = data.filter((item: Movie) => !item.isTrending);
@@ -60,14 +113,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         (item: Movie) => item.category == "TV Series"
       );
       setSeriesFilter(filteredData4);
-      const filteredData5 = data.filter(
-        (item: Movie) => item.category == "Movie" && item.isBookmarked 
-      );
-      setBookmarkedMovieFilter(filteredData5);
-      const filteredData6 = data.filter(
-        (item: Movie) => item.category == "TV Series" && item.isBookmarked 
-      );
-      setBookmarkedSeriesFilter(filteredData6);
     })();
   }, [router]);
 
@@ -92,7 +137,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           bookmarkedMovieFilter,
           setBookmarkedMovieFilter,
           bookmarkedSeriesFilter,
-          setBookmarkedSeriesFilter
+          setBookmarkedSeriesFilter,
         }}
       >
         <Layout>

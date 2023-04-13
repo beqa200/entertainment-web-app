@@ -1,7 +1,8 @@
 import NestedLayout from "@/layouts/NestedLayout";
 import { FormWrapper, StyledForm } from "@/styled-components";
 import Link from "next/link";
-import { ReactElement } from "react";
+import { useRouter } from "next/router";
+import { ReactElement, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function SignUp() {
@@ -11,9 +12,28 @@ export default function SignUp() {
     watch,
     formState: { errors },
   } = useForm<FormValues>();
+  const [message, setMessage] = useState("");
 
-  const onSubmit = () => {
-    console.log("correct");
+  const router = useRouter();
+  const onSubmit = async () => {
+    const response = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: watch("email"),
+        password: watch("password"),
+      }),
+    });
+    const data = await response.json();
+    setMessage(data);
+
+    if (response.ok) {
+      setTimeout(() => {
+        router.push("/login");
+      }, 1000);
+    }
   };
 
   return (
@@ -30,7 +50,7 @@ export default function SignUp() {
                 message: "Invalid email",
               },
             })}
-            style={errors?.email ? {borderBottom: "1px solid #FC4747"}: {}}
+            style={errors?.email ? { borderBottom: "1px solid #FC4747" } : {}}
           />
           {errors?.email && <p className="error">{errors.email.message}</p>}
         </div>
@@ -45,7 +65,9 @@ export default function SignUp() {
                 message: "More than 5 character",
               },
             })}
-            style={errors?.password ? {borderBottom: "1px solid #FC4747"}: {}}
+            style={
+              errors?.password ? { borderBottom: "1px solid #FC4747" } : {}
+            }
           />
           {errors.password && (
             <p className="error">{errors.password.message}</p>
@@ -59,25 +81,33 @@ export default function SignUp() {
               validate: (value, formValues) =>
                 value === formValues.password || "Invalid",
             })}
-            style={errors?.repeatPassword ? {borderBottom: "1px solid #FC4747"}: {}}
+            style={
+              errors?.repeatPassword
+                ? { borderBottom: "1px solid #FC4747" }
+                : {}
+            }
           />
           {errors.repeatPassword && !errors.password && (
             <p className="error">{errors.repeatPassword.message}</p>
           )}
         </div>
 
-        <button
-          type="submit"
-          onClick={() => {
-            console.log(errors);
-          }}
-        >
-          Create an account
-        </button>
+        <button type="submit">Create an account</button>
         <p className="text">
           Alread have an account? <Link href="/login">Login</Link>
         </p>
       </StyledForm>
+      {message && (
+        <p
+          className={
+            message == "Register successfully"
+              ? "success-message"
+              : "error-message"
+          }
+        >
+          {message}
+        </p>
+      )}
     </FormWrapper>
   );
 }
