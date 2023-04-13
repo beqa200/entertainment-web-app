@@ -2,7 +2,7 @@
   "functions": {
     "pages/api/movies.ts": {
       "memory": 1024,
-      "maxDuration": 9
+      "maxDuration": 10
     }
   }
 }
