@@ -4,21 +4,30 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
+import jwt from "jsonwebtoken";
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 
 export default function Layout({ children }: LayoutProps) {
-  const router = useRouter()
+  const router = useRouter();
 
   //redirect to login page when user is not authorized
   useEffect(() => {
     const token = localStorage.getItem("auth-token");
-    if(!token) {
-      router.push("/login")
+    if (token) {
+      const decodedToken: any = jwt.decode(token);
+
+      // Check the expiration status
+      const isTokenExpired = decodedToken.exp < Date.now() / 1000;
+      if (isTokenExpired) {
+        router.push("/login");
+      }
+    } else {
+      router.push("/login");
     }
-  },[router])
+  }, [router]);
 
   return (
     <StyledWrapper>

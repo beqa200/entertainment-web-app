@@ -20,7 +20,8 @@ export default async function handler(
 
     //Create and assign a token
     if (process.env.TOKEN_SECRET) {
-      const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+      const expiresIn = 7200;
+      const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {expiresIn});
       try {
         res.status(200).setHeader("auth-token", token).send(token);
       } catch (err) {
