@@ -73,6 +73,7 @@ npm run dev
 |   |---|--- GlobalStyle
 |   |---|--- index.ts # export all components
 |--- types # declare all types
+- bookmark.ts
 - vercel.json # vercel configuration
 - package.json # dependency manager configurations
 
