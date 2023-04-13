@@ -15,15 +15,15 @@
 
 - <img src="readme/npm.png" width="25" style="top: 8px" /> _npm @8 and up_
 - <img src="readme/vite.jpg" width="25" style="top: 8px" /> _vite @4.0.0_
-- <img src="readme/typescript.png" width="25" style="top: 8px" /> _typescript @4.9.3_
+- <img src="readme/typescript.png" width="25" style="top: 8px" /> _typescript @5.0.3_
 
 #
 
 ### Tech Stack
 
 - <img src="readme/nextjs.png" width="25" style="top: 8px" /> _NextJS @13.2.4 - full-stack framework_
-- <img src="readme/styled-components.png" width="25" style="top: 8px" /> _Styled-components @5.3.6 - visual primitives for the component age_
-- <img src="readme/react-hook-form.png" width="25" style="top: 8px" /> _React Hook Form @7.43.2 - library for making forms_
+- <img src="readme/styled-components.png" width="25" style="top: 8px" /> _Styled-components @5.3.9 - visual primitives for the component age_
+- <img src="readme/react-hook-form.png" width="25" style="top: 8px" /> _React Hook Form @7.43.9 - library for making forms_
 - <img src="readme/mongoose.png" width="25" style="top: 8px" /> _Mongoose @7.0.3 - database_
 - <img src="readme/jwt.png" width="25" style="top: 8px" /> _JWT @9.0.1 - Authentication token_
 - <img src="readme/bcrypt.png" width="25" style="top: 8px" /> _bcrypt @5.0.0 - Password hashing tool_
