@@ -12,7 +12,7 @@ export default async function handler(
   if (req.method == "POST") {
     //Checking if the email exists
     const user = await User.findOne({ email: req.body.email });
-    if (!user) res.status(404).json("User not found");
+    if (!user) return res.status(404).json("User not found");
 
     //Checking if password is correct
     const validPass = await bcrypt.compare(req.body.password, user.password);
@@ -21,7 +21,9 @@ export default async function handler(
     //Create and assign a token
     if (process.env.TOKEN_SECRET) {
       const expiresIn = 7200;
-      const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {expiresIn});
+      const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
+        expiresIn,
+      });
       try {
         res.status(200).setHeader("auth-token", token).send(token);
       } catch (err) {
