@@ -14,24 +14,21 @@ const FormWrapper = styled.div`
     background-position: center top 80px;
   }
 
-  .success-message{
-    background-color: green;
+  .message {
     color: white;
     position: absolute;
-    bottom: 40px;
-    right: 40px;
-    padding: 15px;
-  }
-  
-  .error-message{
-    background-color: red;
-    color: white;
-    position: absolute;
-    bottom: 40px;
-    right: 40px;
+    bottom: 5%;
+    right: 2%;
     padding: 15px;
   }
 
+  .success-message {
+    background-color: green;
+  }
+
+  .error-message {
+    background-color: red;
+  }
 `;
 
 export default FormWrapper;

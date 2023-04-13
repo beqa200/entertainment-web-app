@@ -4,8 +4,11 @@ import styled from "styled-components";
 import RegularMovie from "./RegularMovie";
 
 export default function SearchedContent({ data }: { data: Movie[] }) {
-  const [searchedData, setSearchData] = useState<Movie[]>();
   const context = useContext(MyContext);
+
+  const [searchedData, setSearchData] = useState<Movie[]>();
+
+  //search algorithm
   useEffect(() => {
     const filtered = data.filter(
       (item) =>
@@ -14,6 +17,7 @@ export default function SearchedContent({ data }: { data: Movie[] }) {
     );
     setSearchData([...filtered]);
   }, [context?.searchResult]);
+
   return (
     <RecommendedWrapper>
       <h2 className="heading">

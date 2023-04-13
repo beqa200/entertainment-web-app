@@ -4,8 +4,10 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import { MyContext } from "@/pages/_app";
 export default function Search() {
-  const path = useRouter().asPath;
   const context = useContext(MyContext);
+
+  const path = useRouter().asPath;
+  
   return (
     <SearchWrapper>
       <Image src="/icon-search.svg" width={18} height={18} alt="search logo" />
@@ -72,6 +74,7 @@ const SearchWrapper = styled.div`
       font-size: 24px;
     }
   }
+
   @media (min-width: 768px) {
     img {
       width: 32px;

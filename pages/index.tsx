@@ -19,12 +19,11 @@ export default function Home() {
       {!context?.searchResult ? (
         <>
           <Slider />
-        <StyledHeading>Recommended for you</StyledHeading>
-
-          <Regular data={context.recommendedData}/>
+          <StyledHeading>Recommended for you</StyledHeading>
+          <Regular data={context.recommendedData} />
         </>
       ) : (
-        <SearchedContent data={context.wholeData}/>
+        <SearchedContent data={context.wholeData} />
       )}
     </>
   );

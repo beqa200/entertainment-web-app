@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
- async function connectDB() {
+async function connectDB() {
   if (!process.env.DB_URL) {
     throw new Error("Database URL is not defined in environment variables!");
   }
@@ -62,18 +62,17 @@ const movieSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   bookmarkedMovies: {
     type: Array,
-    required: true
-  }
-})
-
+    required: true,
+  },
+});
 
 movieSchema.set("toJSON", {
   transform: (document, returnedObject) => {
@@ -86,13 +85,12 @@ userSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
-    delete returnedObject.__v
+    delete returnedObject.__v;
   },
 });
 
-
 const Movie = mongoose.models.Movie || mongoose.model("Movie", movieSchema);
 
-const User = mongoose.models.User || mongoose.model("User", userSchema)
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export { connectDB, Movie, User };

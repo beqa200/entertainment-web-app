@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import { connectDB, User } from "../db";
+import { connectDB, User } from "../_db";
 
 connectDB();
 
@@ -22,7 +21,7 @@ export default async function handler(
     const user = new User({
       email: req.body.email,
       password: hashedPassword,
-      bookmarkedMovies: []
+      bookmarkedMovies: [],
     });
     try {
       await user.save();
@@ -32,6 +31,5 @@ export default async function handler(
     }
 
     //await User.deleteMany({})
-    
   }
 }

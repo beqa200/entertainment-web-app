@@ -44,30 +44,18 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [bookmarkedSeriesFilter, setBookmarkedSeriesFilter] = useState<Movie[]>(
     []
   );
-  // const [bookmarkedIds, setBookmarkedIds] = useState([]);
   const router = useRouter();
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("auth-token");
-  //   if (token)
-  //     (async () => {
-  //       const response = await fetch("/api/movies/bookmarked", {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           "auth-token": token,
-  //         },
-  //       });
-  //       const bookmarkedIds = await response.json();
-  //     })();
-  // }, [router]);
 
   useEffect(() => {
     (async () => {
+      //get movies from api
       const response = await fetch("/api/movies");
       const data = await response.json();
 
+      //get auth token from localstorage
       const token = localStorage.getItem("auth-token");
+
+      //get bookmarked movies and series id if token is valid
       if (token) {
         const response = await fetch("/api/movies/bookmarked", {
           method: "GET",
@@ -76,9 +64,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
             "auth-token": token,
           },
         });
+
         const bookmarkedIds = await response.json();
 
-        const transfromedData = data.map((item: Movie) => {
+        //transforming data according to user's bookmarked movies
+        const transfromedData: Movie[] = data.map((item: Movie) => {
           if (bookmarkedIds.find((id: string) => item.id == id)) {
             item.isBookmarked = true;
           } else {
@@ -87,32 +77,38 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           return item;
         });
         setWholeData(transfromedData);
-        const filteredData5 = data.filter(
-          (item: Movie) =>
-            item.category == "Movie" &&
-            bookmarkedIds.find((id: string) => item.id == id)
-        );
-        setBookmarkedMovieFilter(filteredData5);
-        const filteredData6 = data.filter(
-          (item: Movie) =>
-            item.category == "TV Series" &&
-            bookmarkedIds.find((id: string) => item.id == id)
-        );
-        setBookmarkedSeriesFilter(filteredData6);
-      }
 
-      const filteredData = data.filter((item: Movie) => item.isTrending);
-      setTrendingData(filteredData);
-      const filteredData2 = data.filter((item: Movie) => !item.isTrending);
-      setRecommendedData(filteredData2);
-      const filteredData3 = data.filter(
-        (item: Movie) => item.category == "Movie"
-      );
-      setMovieFilter(filteredData3);
-      const filteredData4 = data.filter(
-        (item: Movie) => item.category == "TV Series"
-      );
-      setSeriesFilter(filteredData4);
+        //filter movies with different criterias
+        const bookmarkMovies = transfromedData.filter(
+          (item: Movie) => item.category == "Movie" && item.isBookmarked
+        );
+        setBookmarkedMovieFilter(bookmarkMovies);
+
+        const bookmarkSeries = data.filter(
+          (item: Movie) => item.category == "TV Series" && item.isBookmarked
+        );
+        setBookmarkedSeriesFilter(bookmarkSeries);
+
+        const trendings = transfromedData.filter(
+          (item: Movie) => item.isTrending
+        );
+        setTrendingData(trendings);
+
+        const recommends = transfromedData.filter(
+          (item: Movie) => !item.isTrending
+        );
+        setRecommendedData(recommends);
+
+        const movies = transfromedData.filter(
+          (item: Movie) => item.category == "Movie"
+        );
+        setMovieFilter(movies);
+
+        const series = transfromedData.filter(
+          (item: Movie) => item.category == "TV Series"
+        );
+        setSeriesFilter(series);
+      }
     })();
   }, [router]);
 

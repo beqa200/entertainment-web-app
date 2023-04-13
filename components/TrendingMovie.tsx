@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import { MyContext } from "@/pages/_app";
+import { bookMark } from "@/bookmark";
 
 export default function Movie({
   movie,
@@ -11,24 +12,6 @@ export default function Movie({
   index: number;
 }) {
   const context = useContext(MyContext);
-  const bookMark = async () => {
-    const token = localStorage.getItem("auth-token");
-    if (token) {
-      const dataClone = [...context.wholeData];
-      dataClone[index].isBookmarked = !dataClone[index].isBookmarked;
-      context.setWholeData(dataClone);
-
-      const response = await fetch(`/api/movies/${dataClone[index].id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": token,
-        },
-        body: JSON.stringify({ isBookmarked: dataClone[index].isBookmarked }),
-      });
-      const message = await response.json();
-    }
-  };
 
   const [isHover, setIsHover] = useState(false);
   const [isHoverbookmark, setIsHoverbookmark] = useState(false);
@@ -69,7 +52,7 @@ export default function Movie({
 
       <div
         className="bookmark"
-        onClick={bookMark}
+        onClick={() => bookMark(index, context)}
         style={isHoverbookmark ? { backgroundColor: "white" } : {}}
         onMouseOver={() => setIsHoverbookmark(true)}
         onMouseOut={() => setIsHoverbookmark(false)}

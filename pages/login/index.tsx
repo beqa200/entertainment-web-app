@@ -12,8 +12,12 @@ export default function Login() {
     watch,
     formState: { errors },
   } = useForm<FormValues>();
+
   const [message, setMessage] = useState("");
+
   const router = useRouter();
+
+  //send login information to api
   const onSubmit = async () => {
     const response = await fetch("/api/login", {
       method: "POST",
@@ -25,6 +29,7 @@ export default function Login() {
         password: watch("password"),
       }),
     });
+
     if (response.ok) {
       const token = response.headers.get("auth-token");
       token && localStorage.setItem("auth-token", token);
@@ -37,6 +42,7 @@ export default function Login() {
       }, 3000);
     }
   };
+
   return (
     <FormWrapper>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -73,7 +79,7 @@ export default function Login() {
         </p>
       </StyledForm>
 
-      {message && <p className={"error-message"}>{message}</p>}
+      {message && <p className={"message error-message"}>{message}</p>}
     </FormWrapper>
   );
 }

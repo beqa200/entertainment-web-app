@@ -1,18 +1,18 @@
 import { MyContext } from "@/pages/_app";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import RegularMovie from "./RegularMovie";
-import Movie from "./TrendingMovie";
 
-export default function Recommended({data}: {data: Movie[]}) {
+export default function Recommended({ data }: { data: Movie[] }) {
   const context = useContext(MyContext);
+
   return (
     <RecommendedWrapper>
       <div className="movies">
         {data.map((item: Movie) => (
           <RegularMovie
             movie={item}
-            index={context.wholeData?.findIndex(obj => obj.id === item.id)}
+            index={context.wholeData?.findIndex((obj) => obj.id === item.id)}
             key={item.id}
           />
         ))}

@@ -11,12 +11,15 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   const router = useRouter()
+
+  //redirect to login page when user is not authorized
   useEffect(() => {
     const token = localStorage.getItem("auth-token");
     if(!token) {
       router.push("/login")
     }
   },[router])
+
   return (
     <StyledWrapper>
       <GlobalStyles />

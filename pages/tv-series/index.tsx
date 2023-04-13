@@ -1,8 +1,6 @@
 import Head from "next/head";
-import Image from "next/image";
-import Slider from "@/components/Slider";
 import Regular from "@/components/Regular";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { MyContext } from "../_app";
 import SearchedContent from "@/components/SearchedContent";
 import { StyledHeading } from "@/styled-components";
@@ -20,7 +18,6 @@ export default function movies({ movies }: { movies: Movie[] }) {
       {!context?.searchResult ? (
         <>
           <StyledHeading>TV Series</StyledHeading>
-
           <Regular data={context.seriesFilter} />
         </>
       ) : (

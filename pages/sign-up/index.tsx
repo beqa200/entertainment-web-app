@@ -12,9 +12,12 @@ export default function SignUp() {
     watch,
     formState: { errors },
   } = useForm<FormValues>();
+
   const [message, setMessage] = useState("");
 
   const router = useRouter();
+
+  //send register information to api
   const onSubmit = async () => {
     const response = await fetch("/api/register", {
       method: "POST",
@@ -101,8 +104,8 @@ export default function SignUp() {
         <p
           className={
             message == "Register successfully"
-              ? "success-message"
-              : "error-message"
+              ? "message success-message"
+              : "message error-message"
           }
         >
           {message}

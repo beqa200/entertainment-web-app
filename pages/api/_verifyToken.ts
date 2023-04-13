@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest } from "next";
 import jwt from "jsonwebtoken";
 
 export default function verifyToken(req: NextApiRequest) {

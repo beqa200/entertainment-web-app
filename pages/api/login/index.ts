@@ -1,8 +1,7 @@
-import mongoose from "mongoose";
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { connectDB, User } from "../db";
+import { connectDB, User } from "../_db";
 
 connectDB();
 
@@ -21,15 +20,12 @@ export default async function handler(
 
     //Create and assign a token
     if (process.env.TOKEN_SECRET) {
-      const token =  jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+      const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
       try {
-        res.setHeader("auth-token", token).send(token);
-
-      } catch(err) {
-        res.status(400).json("Bad request")
+        res.status(200).setHeader("auth-token", token).send(token);
+      } catch (err) {
+        res.status(400).json("Bad request");
       }
     }
-
-    // res.send("Logged in!");
   }
 }

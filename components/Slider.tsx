@@ -1,14 +1,14 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import Image from "next/image";
-import Movie from "./TrendingMovie";
 import TrendingMovie from "./TrendingMovie";
 import { MyContext } from "@/pages/_app";
 import { StyledHeading } from "@/styled-components";
 export default function Slider() {
+  const context = useContext(MyContext);
   const scrollableRef = useRef<HTMLDivElement>(null);
   const [isClicked, setIsClicked] = useState(false);
-  const context = useContext(MyContext);
+
+  //scroll effect
   useEffect(() => {
     let intervalId: NodeJS.Timeout | null = null;
 
