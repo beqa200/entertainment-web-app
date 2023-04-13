@@ -1,38 +1,97 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Entertainment web app
 
-## Getting Started
+### Table of Contents
 
-First, run the development server:
+- [Prerequisites](#Prerequisites)
+- [Tech Stack](#Tech-Stack)
+- [Getting Started](#Getting-Started)
+- [Project Structure](#Project-Structure)
+- [Deployment](#Deployment)
+- [Author](#Author)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+#
+
+### Prerequisites
+
+- <img src="readme/npm.png" width="25" style="top: 8px" /> _npm @8 and up_
+- <img src="readme/vite.jpg" width="25" style="top: 8px" /> _vite @4.0.0_
+- <img src="readme/typescript.png" width="25" style="top: 8px" /> _typescript @4.9.3_
+
+#
+
+### Tech Stack
+
+- <img src="readme/nextjs.png" width="25" style="top: 8px" /> _NextJS @13.2.4 - full-stack framework_
+- <img src="readme/styled-components.png" width="25" style="top: 8px" /> _Styled-components @5.3.6 - visual primitives for the component age_
+- <img src="readme/react-hook-form.png" width="25" style="top: 8px" /> _React Hook Form @7.43.2 - library for making forms_
+- <img src="readme/mongoose.png" width="25" style="top: 8px" /> _Mongoose @7.0.3 - database_
+- <img src="readme/jwt.png" width="25" style="top: 8px" /> _JWT @9.0.1 - Authentication token_
+- <img src="readme/bcrypt.png" width="25" style="top: 8px" /> _bcrypt @5.0.0 - Password hashing tool_
+
+#
+
+### Getting Started
+
+1. First of all you need to clone app repository from github:
+
+```
+git clone git@github.com:beqa200/entertainment-web-app.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Next step requires install all the dependencies.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+3. To see project in action
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#
 
-## Learn More
+### Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+|--- components # reusable components
+|--- layouts
+|--- pages
+|   |---|--- api
+|   |---|---|--- login
+|   |---|---|--- movies
+|   |---|---|--- register
+|   |---|---|--- _db.ts
+|   |---|---|--- _verifyToken.ts
+|   |---|--- bookmarked
+|   |---|--- login
+|   |---|--- sign-up
+|   |---|--- tv-series
+|--- public
+|--- styled-components
+|   |---|--- GlobalStyle
+|   |---|--- index.ts # export all components
+|--- types # declare all types
+- vercel.json # vercel configuration
+- package.json # dependency manager configurations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#
 
-## Deploy on Vercel
+### Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Before every deployment you need to create build file.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+npm run build
+```
+
+after this you can use this file to deploy project on server.
+
+#
+
+### Author
+
+- [LinkedIn](https://www.linkedin.com/in/beka-maisuradze-76a730234/)
