@@ -1,6 +1,7 @@
 import Layout from "@/layouts/Layout";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 import { createContext } from "react";
@@ -136,7 +137,15 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           setBookmarkedSeriesFilter,
         }}
       >
+          <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap"
+          rel="stylesheet"
+        />
+        <link href="./logo.svg" rel="icon"/>
+      </Head>
         <Layout>
+         
           <Component {...pageProps} />
         </Layout>
       </MyContext.Provider>

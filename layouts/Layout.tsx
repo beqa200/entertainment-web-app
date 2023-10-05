@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import jwt from "jsonwebtoken";
+import { Head } from "next/document";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -31,6 +32,7 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <StyledWrapper>
+      
       <GlobalStyles />
       <Header />
 
